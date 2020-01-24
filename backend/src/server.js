@@ -12,5 +12,3 @@ mongoose.connect('mongodb+srv://walber:rocha123@omnistack-htfyz.mongodb.net/Omni
 app.use(express.json());
 app.use(routes);
 app.listen(4200);
-
-
