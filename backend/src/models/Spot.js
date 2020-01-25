@@ -8,6 +8,15 @@ const SpotSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
+},
+{
+    toJSON: {
+        virtuals: true,
+    },
+});
+
+SpotSchema.virtual('thumbnail_url').get(function() {
+    return `http://localhost:4200/files/${this.thumbnail}`
 })
 
 module.exports = mongoose.model('Spot', SpotSchema);
