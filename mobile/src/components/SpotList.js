@@ -5,6 +5,9 @@ import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
 import api from '../services/api';
 import styles from './SpotList_styles';
 
+//localhost IP address
+const url = '192.168.0.106';
+
 function SpotList({ tech, navigation }) {
     const [spots, setSpots] = useState([]);
 
@@ -33,7 +36,7 @@ function SpotList({ tech, navigation }) {
                 showsHorizontalScrollIndicator = {false}
                 renderItem = {({ item }) => (
                     <View style = { styles.listItem }>
-                        <Image style = { styles.thumbnail } source = {{ uri: item.thumbnail_url.replace('localhost', '192.168.0.106') }} />
+                        <Image style = { styles.thumbnail } source = {{ uri: item.thumbnail_url.replace('localhost', url) }} />
                         <Text style = { styles.company }>{ item.company }</Text>
                         <Text style = { styles.price }> { item.price ? `R$${item.price}/dia` : 'Gratuito' }</Text>
                         <TouchableOpacity onPress = {() => handleSubmit(item._id) } style = { styles.button }>
