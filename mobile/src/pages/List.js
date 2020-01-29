@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, AsyncStorage, Image, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, AsyncStorage, Image, StyleSheet, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 
 import Logo from '../../assets/logo.png';
 import SpotList from '../components/SpotList';
+import socketio from 'socket.io-client';
 
 export default function List( {navigation} ) {
     const [ techs, setTechs ] = useState([]);
+
+    useEffect(() => {
+        AsyncStorage.getItem('user').then(user_id => {
+            const socket = socketio('http://192.168.0.106:4200', {
+                query: { user_id }
+            })
+            
+            socket.on('booking_response', booking => {
+                Alert.alert(`Sua reserva em ${booking.spot.company} em ${booking.date} foi ${booking.approved ? 'APROVADA!' : 'REJEITADA!'}`)
+            })
+        })
+    }, []);
 
     useEffect(() => {  
         AsyncStorage.getItem('techs').then(storagedTechs => {
             const techsArray = storagedTechs.split(',').map(tech => tech.trim());
             setTechs(techsArray);
         });
-    }, [])
+    }, []);
 
     async function backHandleSubmit() { 
-        AsyncStorage.clear();
-        navigation.navigate('Login')
-    }
+        await AsyncStorage.clear();
+        navigation.navigate('Login');
+    };
 
     return (
         <SafeAreaView style = { styles.container }>
