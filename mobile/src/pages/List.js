@@ -12,7 +12,6 @@ export default function List( {navigation} ) {
             const techsArray = storagedTechs.split(',').map(tech => tech.trim());
             setTechs(techsArray);
         });
-        console.log(techs);
     }, [])
 
     async function backHandleSubmit() { 
@@ -49,11 +48,11 @@ const styles = StyleSheet.create({
 
     button: {
         height: 42,
-        backgroundColor: '#f05a5b',
+        backgroundColor: '#CCC',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 2,
-        marginTop: 20
+        marginTop: 15
     },
 
     buttonText: {
