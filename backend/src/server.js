@@ -1,9 +1,9 @@
 const express = require('express');
-const routes = require('./routes');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path')
 
+const routes = require('./routes');
 
 const app = express();
 mongoose.connect('mongodb+srv://walber:rocha123@omnistack-htfyz.mongodb.net/Omnistack9?retryWrites=true&w=majority', {
