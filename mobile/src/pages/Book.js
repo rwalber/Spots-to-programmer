@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, AsyncStorage, TextInput, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Alert, Text, AsyncStorage, TextInput, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
+
+import api from '../services/api';
 
 export default function Book( {navigation} ) {
     
@@ -7,12 +9,23 @@ export default function Book( {navigation} ) {
     const [date, setDate] = useState('');
     
     async function handleSubmit() {
-        console.log("Botão funcionando");
+        const user_id = await AsyncStorage.getItem('user');
+        await api.post(`/spots/${id}/bookings`, {
+            date
+        }, {
+            headers: { user_id }
+        })
+
+        Alert.alert('Solicitação de reserva enviada!');
+        navigation.navigate('List');
+    }
+
+    function cancelHandleSubmit() {
+        navigation.navigate('List');
     }
 
     return ( 
-    <SafeAreaView>
-        <Text>{ id }</Text> 
+    <SafeAreaView style = { styles.container }>
         <Text style = { styles.label }>Data de interesse *</Text>
             <TextInput 
                 style = { styles.input } 
@@ -26,14 +39,19 @@ export default function Book( {navigation} ) {
         <TouchableOpacity onPress = {handleSubmit} style = { styles.button }>
             <Text style = { styles.buttonText }>Confirmar reserva!</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress = {cancelHandleSubmit} style = { [styles.button, styles.cancelButton] }>
+            <Text style = { styles.buttonText }>Cencelar</Text>
+        </TouchableOpacity>
+
     </SafeAreaView>
 )}
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        margin: 30,
+        // justifyContent: 'center',
+        // alignItems: 'center'
     },
 
     form: {
@@ -45,7 +63,8 @@ const styles = StyleSheet.create({
     label: {
         fontWeight: 'bold',
         color: '#444',
-        marginBottom: 8
+        marginBottom: 8,
+        marginTop: 10,
     },
 
     input: {
@@ -65,6 +84,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 2
+    },
+
+    cancelButton: {
+        backgroundColor: '#CCC',
+        marginTop: 10,
     },
 
     buttonText: {

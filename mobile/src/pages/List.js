@@ -16,7 +16,6 @@ export default function List( {navigation} ) {
     }, [])
 
     async function backHandleSubmit() { 
-        // console.log("Botão voltar")
         AsyncStorage.clear();
         navigation.navigate('Login')
     }
@@ -27,7 +26,6 @@ export default function List( {navigation} ) {
             <ScrollView>
            {techs.map(tech => <SpotList key = { tech } tech={tech} />)}
            </ScrollView>
-           
            
            {/* Back button */}
            <TouchableOpacity onPress = {backHandleSubmit} style = { styles.button }>
@@ -64,4 +62,3 @@ const styles = StyleSheet.create({
         fontSize: 16
     }
 });
-

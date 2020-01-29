@@ -28,7 +28,6 @@ export default function Login( { navigation } ) {
        navigation.navigate('List')
     };
     
-
     return (
         <KeyboardAvoidingView behavior="padding" style = { styles.container }>
         <Image source = {Logo} />

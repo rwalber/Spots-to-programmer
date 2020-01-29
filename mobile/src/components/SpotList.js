@@ -3,6 +3,7 @@ import { withNavigation } from 'react-navigation';
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 
 import api from '../services/api';
+import styles from './SpotList_styles';
 
 function SpotList({ tech, navigation }) {
     const [spots, setSpots] = useState([]);
@@ -12,15 +13,19 @@ function SpotList({ tech, navigation }) {
             const response = await api.get('/spots', {
                 params: { tech }
             })
-            console.log(response.data);
             setSpots(response.data);
         };
-
         loadSpots();
     }, [])
 
     async function handleSubmit(id) {
         navigation.navigate('Book', { id })
+    }
+
+    function teste(item) {
+        const tt = item.split(':');
+        // const t = item.split(':');
+        console.log(`'${tt[0]}://192.168.0.106:${tt[2]}'`);
     }
     
     return(
@@ -34,9 +39,11 @@ function SpotList({ tech, navigation }) {
                 showsHorizontalScrollIndicator = {false}
                 renderItem = {({ item }) => (
                     <View style = { styles.listItem }>
-                        <Image style = { styles.thumbnail } source = {{ uri: item.thumbnail_url }} />
+                        <Image style = { styles.thumbnail } source = {{uri:"https://reactjs.org/logo-og.png"}} />
+                        {/* <Image style = { styles.thumbnail } source = {{ uri: `'${item.thumbnail_url}'` }} /> */}
                         <Text style = { styles.company }>{ item.company }</Text>
                         <Text style = { styles.price }> { item.price ? `R$${item.price}/dia` : 'Gratuito' }</Text>
+                        {/* <TouchableOpacity onPress = {() => teste(item.thumbnail_url) } style = { styles.button }> */}
                         <TouchableOpacity onPress = {() => handleSubmit(item._id) } style = { styles.button }>
                             <Text style = { styles.buttonText }>Solicitar reserva</Text>
                         </TouchableOpacity>
@@ -46,66 +53,5 @@ function SpotList({ tech, navigation }) {
         </View>
     )
 };
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 30,
-        flex: 1
-    },
-
-    title: {
-        fontSize: 20,
-        color: '#444',
-        paddingHorizontal: 20,
-        marginBottom: 15,
-    },
-
-    bold: {
-        fontWeight: 'bold',
-    },
-
-    list: {
-        paddingHorizontal: 20,
-    },
-
-    listItem: {
-        marginRight: 15,
-    },
-
-    thumbnail: {
-        width: 200,
-        height: 120,
-        resizeMode: 'cover',
-        borderRadius: 2,
-    },
-
-    company: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#333',
-        marginTop: 10,
-    },
-
-    price: {
-        fontSize: 15,
-        color: '#3c28d3',
-        marginTop: 5,
-    },
-
-    button: {
-        height: 32,
-        backgroundColor: '#f05a5b',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 2,
-        marginTop: 15
-    },
-
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 15
-    },
-});
 
 export default withNavigation(SpotList);
