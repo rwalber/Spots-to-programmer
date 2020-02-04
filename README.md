@@ -21,16 +21,19 @@
 ## Build project
 
 ##### Run backend
-
-$backend/
-$yarn dev
+```
+backend/
+yarn dev
+```
 
 ##### Run frontend-web
-
-$frontend/
-$yarn start
+```
+frontend/
+yarn start
+```
 
 ##### Run mobile
-
-$mobile/
-$yarn start
+```
+mobile/
+yarn start
+```
