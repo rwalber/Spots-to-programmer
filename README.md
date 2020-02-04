@@ -8,4 +8,14 @@
 
 ![Screenshot](assets/home.png)
 
+![Screenshot](assets/Spot-List.png)
+
+![Screenshot](assets/Add-Spot.png)
+
 ##### Mobile:
+
+![Screenshot](assets/mobile.png)
+
+***
+
+##Build project
