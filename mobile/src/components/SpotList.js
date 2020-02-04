@@ -6,7 +6,7 @@ import api from '../services/api';
 import styles from './SpotList_styles';
 
 //localhost IP address
-const url = '192.168.0.106';
+const url = 'localhost IP address';
 
 function SpotList({ tech, navigation }) {
     const [spots, setSpots] = useState([]);

@@ -12,8 +12,10 @@ const app = express();
 const server = http.Server(app);
 const io = socketio(server);
 
+// Database connection string only
+const connection = 'Connection String Only';
 
-mongoose.connect('mongodb+srv://walber:rocha123@omnistack-htfyz.mongodb.net/Omnistack9?retryWrites=true&w=majority', {
+mongoose.connect(`${connection}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -23,7 +25,6 @@ const connectedUsers = [];
 io.on('connection', socket => {
     const { user_id } = socket.handshake.query;
     connectedUsers[user_id] = socket.id;
-    console.log('Usuario conectado', socket.id);
 })
 
 app.use((req, res, next) => {
