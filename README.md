@@ -1,8 +1,8 @@
 # AirCNC - Spots to programmer
 
-#### A proposta é que empresas possam oferecer a nós, programadores, a possibilidade de ambientes voltados a programação, viabilizando um network de toda comunidade, bem como, encontre talentos para sua empresa.
+#### The proposal is that companies can offer us, programmers, the possibility of environments focused on programming, enabling a network of the entire community, as well as, find talents for your company.
 
-##### Tecnologias utilizadas: *React, React Native e NodeJs.*
+##### Technologies used: React, React Native and NodeJs. For the database, MongoDB was used.
 
 ##### Front-end web:
 
@@ -19,3 +19,18 @@
 ***
 
 ## Build project
+
+##### Run backend
+
+$backend/
+$yarn dev
+
+##### Run frontend-web
+
+$frontend/
+$yarn start
+
+##### Run mobile
+
+$mobile/
+$yarn start
